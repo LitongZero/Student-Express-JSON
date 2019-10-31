@@ -1,6 +1,10 @@
-### gitee地址：https://gitee.com/litong-zero/Student-Express-JSON
+### JSON版本gitee地址：https://gitee.com/litong-zero/Student-Express-JSON
+### MySQL版本gitee地址：https://gitee.com/litong-zero/Student-Express-MySQL
+### MongoDB版本gitee地址：https://gitee.com/litong-zero/Student-Express-MongoDB
 
-# Node.js学生管理系统（Express+JSON文件）
+# Node.js学生管理系统（Express+JSON文件/MySQL/MongoDB）
+
+# 切换分支查看其他版本(master分支为JOSN文件版本)
 
 ## 1、初始化项目
 
