@@ -1,3 +1,5 @@
+# gitee地址：https://gitee.com/litong-zero/Student-Express-JSON
+
 # Node.js学生管理系统（Express+JSON文件）
 
 ## 1、初始化项目
