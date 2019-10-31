@@ -26,24 +26,23 @@ var router = express.Router();
 渲染学生列表界面
  */
 router.get('/students', function (req, res) {
-    if (req.query.id != null && req.query.id!=undefined &&req.query.id!='' ){
-        Student.findById(req.query.id,function (err,student) {
+    if (req.query.name != null && req.query.name != undefined && req.query.name != '') {
+        Student.findOneByName( req.query.name, function (err, students) {
             if (err) {
                 return res.status(500).send('Server error');
             }
-            if (student ==undefined){
+            console.log(students.toString())
+            if (students.toString().length == 0) {
                 res.render('index.html', {
-                    count:0,
-                    student: student
+                    count: 0,
                 })
-            }else {
+            } else {
                 res.render('index.html', {
-                    count:1,
-                    student: student
+                    students: students
                 })
             }
         })
-    }else {
+    } else {
         Student.find(function (err, students) {
             if (err) {
                 return res.status(500).send('Server error');
@@ -73,7 +72,7 @@ router.get('/students/new', function (req, res) {
  * 处理添加学生
  */
 router.post('/students/new', function (req, res) {
-    Student.save(req.body, function (err) {
+    Student.add(req.body,function (err) {
         if (err) {
             return res.status(500).send('Server error');
         }
@@ -91,8 +90,9 @@ router.get('/students/edit', function (req, res) {
     //    根据 id 把学生信息查出来
     //    使用模板引擎渲染页面
 
-    Student.findById(parseInt(req.query.id), function (err, student) {
+    Student.findById(req.query.id, function (err, student) {
         if (err) {
+            console.log(err)
             return res.status(500).send('Server error.');
         }
         res.render('edit.html', {
@@ -110,7 +110,8 @@ router.post('/students/edit', function (req, res) {
     // 2. 更新
     //    Student.updateById()
     // 3. 发送响应
-    Student.updateById(req.body, function (err) {
+    var id = req.body.id
+    Student.findByIdAndUpdate(id, req.body, function (err) {
         if (err) {
             return res.status(500).send('Server error.')
         }
@@ -125,7 +126,8 @@ router.get('/students/delete', function (req, res) {
     // 1. 获取要删除的 id
     // 2. 根据 id 执行删除操作
     // 3. 根据操作结果发送响应数据
-    Student.deleteById(req.query.id, function (err) {
+    var id = req.query.id
+    Student.findByIdAndRemove(id, function (err) {
         if (err) {
             return res.status(500).send('Server error.')
         }
