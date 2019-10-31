@@ -61,30 +61,53 @@
                 </thead>
                 <tbody>
                 {{if count == 0}}
-                    <tr>
-                    </tr>
+                <tr>
+
+                </tr>
+                <td>
+                    未找到该姓名,请重新查询!
+                </td>
+                </tbody>
+                {{else if count == 1}}
+                <tr>
+                    {{if index == null}}
+                    <td>1</td>
+                    {{else}}
+                    <td>{{ $index +1 }}</td>
+                    {{/if}}
+                    <td>{{ student.name }}</td>
+                    {{if student.gender==0 }}
+                    <td>男</td>
+                    {{else}}
+                    <td>女</td>
+                    {{/if}}
+                    <td> {{ student.age }}</td>
+                    <td>{{ student.hobbies }}</td>
                     <td>
-                        未找到该姓名,请重新查询!
+                        <a href="/students/edit?id={{ student._id }}">编辑</a>
+                        <a href="javascript:if(confirm('确实要删除?'))location='/students/delete?id={{ student._id }}'">删除</a>
                     </td>
-                    </tbody>
+                </tr>
                 {{else}}
-                    {{each students}}
-                    <tr>
-                        <td>{{ $index +1 }}</td>
-                        <td>{{ $value.name }}</td>
-                        {{if $value.gender==0 }}
-                        <td>男</td>
-                        {{else}}
-                        <td>女</td>
-                        {{/if}}
-                        <td> {{ $value.age }}</td>
-                        <td>{{ $value.hobbies }}</td>
-                        <td>
-                            <a href="/students/edit?id={{ $value.id }}">编辑</a>
-                            <a href="javascript:if(confirm('确实要删除?'))location='/students/delete?id={{ $value.id }}'">删除</a>
-                        </td>
-                    </tr>
-                    {{ /each }}
+
+                {{each students}}
+                <tr>
+                    <td>{{ $index +1 }}</td>
+                    <td>{{ $value.name }}</td>
+                    {{if $value.gender==0 }}
+                    <td>男</td>
+                    {{else}}
+                    <td>女</td>
+                    {{/if}}
+                    <td> {{ $value.age }}</td>
+                    <td>{{ $value.hobbies }}</td>
+                    <td>
+                        <a href="/students/edit?id={{ $value._id }}">编辑</a>
+                        <a href="javascript:if(confirm('确实要删除?'))location='/students/delete?id={{ $value._id }}'">删除</a>
+                    </td>
+                </tr>
+                {{ /each }}
+
                 {{/if}}
 
 
